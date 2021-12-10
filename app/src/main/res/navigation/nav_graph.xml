@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/dashBoardFragment">
+    <fragment
+        android:id="@+id/dashBoardFragment"
+        android:name="com.example.inventory.ui.dashboard.DashBoardFragment"
+        android:label="@string/dashBoard_fragemnt_label"
+        tools:layout="@layout/fragment_dash_board" >
+        <action
+            android:id="@+id/action_dashBoardFragment_to_aboutUsFragment"
+            app:destination="@id/aboutUsFragment" />
+        <action
+            android:id="@+id/action_dashBoardFragment_to_addInventoryFragment"
+            app:destination="@id/addInventoryFragment" />
+        <action
+            android:id="@+id/action_dashBoardFragment_to_depndencyListFragment"
+            app:destination="@id/depndencyListFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/aboutUsFragment"
+        android:name="com.example.inventory.ui.about.AboutUsFragment"
+        android:label="@string/aboutus_fragemnt_label"
+        tools:layout="@layout/fragment_about_us" />
+    <fragment
+        android:id="@+id/addInventoryFragment"
+        android:name="com.example.inventory.ui.inventory.AddInventoryFragment"
+        android:label="fragment_add_inventory"
+        tools:layout="@layout/fragment_add_inventory" />
+    <fragment
+        android:id="@+id/depndencyListFragment"
+        android:name="com.example.inventory.ui.dependency.DependencyListFragment"
+        android:label="fragment_depndency_list"
+        tools:layout="@layout/fragment_dependency_list" >
+        <action
+            android:id="@+id/action_depndencyListFragment_to_baseDialogFragment"
+            app:destination="@id/baseDialogFragment" />
+        <action
+            android:id="@+id/action_depndencyListFragment_to_dependencyManage"
+            app:destination="@id/dependencyManage" />
+    </fragment>
+    <dialog
+        android:id="@+id/baseDialogFragment"
+        android:name="com.example.inventory.ui.base.BaseDialogFragment"
+        android:label="BaseDialogFragment" />
+    <fragment
+        android:id="@+id/dependencyManage"
+        android:name="com.example.inventory.ui.dependency.manage.DependencyManage"
+        android:label="fragment_dependency_manage"
+        tools:layout="@layout/fragment_dependency_manage" >
+        <argument
+            android:name="dependency"
+            app:argType="com.example.inventory.data.model.Dependency" />
+    </fragment>
+</navigation>

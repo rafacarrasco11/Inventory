@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/constraintLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.dashboard.DashBoardFragment"
+    android:stretchColumns="0,1"
+    android:gravity="center"
+    android:padding="@dimen/fragDashboard_tableLyt_padding">
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageButton
+            android:id="@+id/imgBtnInventory"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_logo_inventorynavigation"
+            android:background="@android:color/transparent"
+            android:contentDescription="@string/fragDashboard_imgBtnInventory_text"/>
+
+        <ImageButton
+            android:id="@+id/imgBtnDependencies"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_logo_dependencias"
+            android:background="@android:color/transparent"
+            android:contentDescription="@string/fragDashboard_imgBtnDependencies_text"/>
+    </TableRow>
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <View
+            android:layout_height="@dimen/fragDashBorad_view_height"
+            android:layout_width="@dimen/fragDashBorad_view_width">
+        </View>
+    </TableRow>
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageButton
+            android:id="@+id/imgBtnSectors"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_logo_sectors"
+            android:background="@android:color/transparent"
+            android:contentDescription="@string/fragDashboard_imgBtnSectors_text"/>
+
+        <ImageButton
+            android:id="@+id/imgBtnProducts"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_logo_productos"
+            android:background="@android:color/transparent"
+            android:contentDescription="@string/fragDashboard_imgBtnProducts_text"/>
+    </TableRow>
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <View
+            android:layout_height="@dimen/fragDashBorad_view_height"
+            android:layout_width="@dimen/fragDashBorad_view_width">
+        </View>
+    </TableRow>
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageButton
+            android:id="@+id/imgBtnSettings"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_logo_settings"
+            android:background="@android:color/transparent"
+            android:contentDescription="@string/fragDashboard_imgBtnSettings_text"/>
+
+        <ImageButton
+            android:id="@+id/imgBtnAboutUs"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_logo_aboutus"
+            android:background="@android:color/transparent"
+            android:contentDescription="@string/fragDashboard_imgBtnAboutUs_text"/>
+    </TableRow>
+</TableLayout>

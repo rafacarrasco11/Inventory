@@ -1,0 +1,24 @@
+<resources>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
+    <dimen name="splash_tvName_marginBottom">200dp</dimen>
+    <dimen name="splash_tvName_textSize">38sp</dimen>
+    <dimen name="splash_imgLogo_marginTop">150dp</dimen>
+    <dimen name="login_tvTitleLogin_marginTop">20dp</dimen>
+    <dimen name="login_tilUser_marginTop">10dp</dimen>
+    <dimen name="login_tilPassword_marginTop">10dp</dimen>
+    <dimen name="login_chkBtnLog_marginTop">10dp</dimen>
+    <dimen name="login_btSignIn_marginTop">10dp</dimen>
+    <dimen name="login_tvOtherLogin_paddingBottom">5dp</dimen>
+    <dimen name="inventory_title_textSixe">38sp</dimen>
+    <dimen name="fragDashBorad_view_height">100dp</dimen>
+    <dimen name="fragDashBorad_view_width">10dp</dimen>
+    <dimen name="fragDashboard_tableLyt_padding">30dp</dimen>
+    <dimen name="fragaddinventory_guideline_left">30dp</dimen>
+    <dimen name="fab_elevation">6dp</dimen>
+    <dimen name="pB_signup_marginTop">50dp</dimen>
+    <dimen name="imgvIcon_DependencyItem_marginLeft">20dp</dimen>
+    <dimen name="depenIntem_imgvIcon_padding">5dp</dimen>
+</resources>
