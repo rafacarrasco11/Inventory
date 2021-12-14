@@ -10,6 +10,10 @@ public class Dependency implements Comparable, Serializable {
     private String description;
     private String image;
 
+    public Dependency() {
+
+    }
+
     public Dependency(String name, String shortName, String description, String image) {
         this.name = name;
         this.shortName = shortName;

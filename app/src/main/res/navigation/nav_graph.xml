@@ -52,6 +52,7 @@
         tools:layout="@layout/fragment_dependency_manage" >
         <argument
             android:name="dependency"
-            app:argType="com.example.inventory.data.model.Dependency" />
+            app:argType="com.example.inventory.data.model.Dependency"
+            app:nullable="true" />
     </fragment>
 </navigation>

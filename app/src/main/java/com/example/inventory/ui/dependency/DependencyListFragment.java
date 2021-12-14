@@ -20,8 +20,9 @@ import android.widget.Toast;
 
 import com.example.inventory.R;
 import com.example.inventory.data.model.Dependency;
-import com.example.inventory.databinding.FragmentDepndencyListBinding;
+import com.example.inventory.databinding.FragmentDependencyListBinding;
 import com.example.inventory.ui.base.BaseDialogFragment;
+import com.example.inventory.ui.base.OnRepositoryListCallback;
 import com.google.android.material.snackbar.BaseTransientBottomBar;
 import com.google.android.material.snackbar.Snackbar;
 
@@ -30,9 +31,10 @@ import java.util.List;
 
 public class DependencyListFragment extends Fragment implements DependencyListContract.View, DependencyAdapter.OnManagerDependencyListener {
 
-    private FragmentDepndencyListBinding binding;
+    private FragmentDependencyListBinding binding;
     private DependencyAdapter adapter;
     private DependencyListContract.Presenter presenter;
+    private OnRepositoryListCallback callback;
     // Una vez que el repositorio elimina la dependencia, el adapter debe eliminar la dependencia
     private Dependency deleted;
 
@@ -76,6 +78,7 @@ public class DependencyListFragment extends Fragment implements DependencyListCo
         setHasOptionsMenu(true);
 
         presenter = new DependencyListPresenter(this);
+        callback = this;
     }
 
     // 2. Sobreescribir/anular el metodo onCreateoptionsMenu para anadir el menu del fragment
@@ -106,7 +109,7 @@ public class DependencyListFragment extends Fragment implements DependencyListCo
         super.onCreateView(inflater, container, savedInstanceState);
         // Inflate the layout for this fragment
         //return inflater.inflate(R.layout.fragment_dependency_list, container, false);
-        binding = FragmentDepndencyListBinding.inflate(inflater);
+        binding = FragmentDependencyListBinding.inflate(inflater);
         return binding.getRoot();
     }
 
@@ -114,7 +117,7 @@ public class DependencyListFragment extends Fragment implements DependencyListCo
     public void onStart() {
         super.onStart();
         // Pide y solicita lls datos
-        presenter.load();
+        presenter.load(this);
     }
 
     //region METODOS VIEW
@@ -134,8 +137,8 @@ public class DependencyListFragment extends Fragment implements DependencyListCo
     }
 
     @Override
-    public <T> void onSuccess(List<T> List) {
-
+    public <T> void onSuccess(List<T> list) {
+        showData((List<Dependency>) list);
     }
 
     /**
@@ -147,7 +150,7 @@ public class DependencyListFragment extends Fragment implements DependencyListCo
         Snackbar.make(getView(),message, BaseTransientBottomBar.LENGTH_SHORT).setAction(getString(R.string.undo), new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                presenter.undo(deleted);
+                presenter.undo(deleted, callback);
                 binding.rvDependency.setVisibility(View.VISIBLE);
                 binding.llDependecyListShowNoData.setVisibility(View.GONE);
             }
@@ -211,7 +214,7 @@ public class DependencyListFragment extends Fragment implements DependencyListCo
                 //Si la respuesta es true en deletedDependency se procede con el caso de uso DELETE
                 if (bundle.getBoolean(BaseDialogFragment.KEY_BUNDLE)) {
                     deleted = dependency;
-                    presenter.delete(dependency);
+                    presenter.delete(dependency,callback);
 
                 }
             }

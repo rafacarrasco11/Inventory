@@ -2,6 +2,8 @@ package com.example.inventory.ui.dependency;
 
 import com.example.inventory.data.model.Dependency;
 import com.example.inventory.data.repository.DependencyRepository;
+import com.example.inventory.ui.base.OnRepositoryCallback;
+import com.example.inventory.ui.base.OnRepositoryListCallback;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,20 +36,20 @@ public class DependencyListInteractor implements DependencyListContract.OnIntera
         listener.onUndoSuccess(message);
     }
 
-    public void load() {
+    public void load(OnRepositoryListCallback callback) {
         //SIEMPRE SE ACCEDE DE FORMA ESTATICA AL REPOSITORIO
-        DependencyRepository.getInstance(this).getList();
+        DependencyRepository.getInstance().getList(callback);
     }
 
     /**
      * Elimina una dependencia del repositorio
      * @param dependency
      */
-    public void delete(Dependency dependency) {
-        DependencyRepository.getInstance(this).delete(dependency);
+    public void delete(Dependency dependency, OnRepositoryListCallback callback) {
+        DependencyRepository.getInstance().delete(dependency, callback);
     }
 
-    public void undo(Dependency dependency) {
-        DependencyRepository.getInstance(this).undo(dependency);
+    public void undo(Dependency dependency, OnRepositoryListCallback callback) {
+        DependencyRepository.getInstance().undo(dependency, callback);
     }
 }

@@ -1,6 +1,7 @@
 package com.example.inventory.ui.dependency;
 
 import com.example.inventory.data.model.Dependency;
+import com.example.inventory.ui.base.OnRepositoryListCallback;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,9 +23,9 @@ public class DependencyListPresenter implements  DependencyListContract.Presente
     }
 
     @Override
-    public void load() {
+    public void load(OnRepositoryListCallback callback) {
         view.showProgress();
-        interactor.load();
+        interactor.load(callback);
     }
 
     /**
@@ -32,13 +33,13 @@ public class DependencyListPresenter implements  DependencyListContract.Presente
      * @param dependency
      */
     @Override
-    public void delete(Dependency dependency) {
-        interactor.delete(dependency);
+    public void delete(Dependency dependency, OnRepositoryListCallback callback) {
+        interactor.delete(dependency, callback);
     }
 
     @Override
-    public void undo(Dependency dependency) {
-        interactor.undo(dependency);
+    public void undo(Dependency dependency, OnRepositoryListCallback callback) {
+        interactor.undo(dependency, callback);
     }
 
     @Override
@@ -50,8 +51,6 @@ public class DependencyListPresenter implements  DependencyListContract.Presente
             order = true;
             view.showDataOrder();
         }
-
-
     }
 
     @Override

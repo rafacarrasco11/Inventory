@@ -30,11 +30,11 @@ public interface DependencyListContract {
      */
     interface Presenter extends BasePresenter{
         //1. Cargar los datos
-        void load();
+        void load(OnRepositoryListCallback callback);
         //2. cuando se realiza una pulsación larga se elimina
-        void delete (Dependency dependency);
+        void delete (Dependency dependency, OnRepositoryListCallback callback);
         //3. Cuando el usuario pulsa la opcion undo del snackbar
-        void undo(Dependency dependency);
+        void undo(Dependency dependency, OnRepositoryListCallback callback);
         // 4. Que la lista se ordene por nombre
         void order();
     }
@@ -44,11 +44,11 @@ public interface DependencyListContract {
      */
     interface Repository{
         //1. Cargar los datos
-        void getList();
+        void getList(OnRepositoryListCallback callback);
         //2. cuando se realiza una pulsación larga se elimina
-        void delete (Dependency dependency);
+        void delete (Dependency dependency, OnRepositoryListCallback callback);
         //3. Cuando el usuario pulsa la opcion undo del snackbar
-        void undo(Dependency dependency);
+        void undo(Dependency dependency, OnRepositoryListCallback callback);
     }
 
     /**
