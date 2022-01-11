@@ -59,4 +59,10 @@
     <string name="action_orderbydescrip_dependency">Ordenar por descripcion</string>
     <string name="undo">Deshacer</string>
     <string name="title_edit_ependency">Editar Dependencia</string>
+    <string name="tvUser">Usuario</string>
+    <string name="tvEmail">userusuario@gmail.com</string>
+    <string name="action_inventory">Inventario</string>
+    <string name="action_dependency">Dependencias</string>
+    <string name="action_section">Seccion</string>
+    <string name="action_product">Producto</string>
 </resources>

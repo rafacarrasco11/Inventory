@@ -2,17 +2,37 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <item android:title="@string/action_search"
-        android:id="@+id/action_search"
-        app:showAsAction="always"
-        android:icon="@drawable/ic_action_email"
-        android:orderInCategory="2"/>
+    <item android:title="@string/action_inventory"
+        android:id="@+id/action_inventory"
+        app:showAsAction="never"
+        android:orderInCategory="1"
+        android:icon="@drawable/ic_action_ab_us"/>
+    <item android:title="@string/action_dependency"
+        android:id="@+id/action_dependency"
+        app:showAsAction="never"
+        android:orderInCategory="2"
+        android:icon="@drawable/ic_action_ab_us"/>
+
+    <item android:title="@string/action_section"
+        android:id="@+id/action_section"
+        app:showAsAction="never"
+        android:orderInCategory="3"
+        android:icon="@drawable/ic_action_ab_us"/>
+
+    <item android:title="@string/action_product"
+        android:id="@+id/action_product"
+        app:showAsAction="never"
+        android:orderInCategory="4"
+        android:icon="@drawable/ic_action_ab_us"/>
+
     <item android:title="@string/acion_aboutus"
         android:id="@+id/action_aboutus"
         app:showAsAction="never"
-        android:orderInCategory="3"/>
+        android:orderInCategory="5"
+        android:icon="@drawable/ic_action_ab_us"/>
     <item android:title="@string/action_settings"
         app:showAsAction="never"
         android:id="@+id/action_settings"
-        android:orderInCategory="4"/>
+        android:orderInCategory="6"
+        android:icon="@drawable/ic_action_settings"/>
 </menu>

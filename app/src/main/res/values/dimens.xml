@@ -21,4 +21,9 @@
     <dimen name="pB_signup_marginTop">50dp</dimen>
     <dimen name="imgvIcon_DependencyItem_marginLeft">20dp</dimen>
     <dimen name="depenIntem_imgvIcon_padding">5dp</dimen>
+    <dimen name="toolbar_main_elevation">4dp</dimen>
+    <dimen name="imvProfile_header_marginTop">35dp</dimen>
+    <dimen name="tvUser_header_marginTop">10dp</dimen>
+    <dimen name="tvUser_header_textSize">30sp</dimen>
+    <dimen name="tvEmail_header_textSize">20sp</dimen>
 </resources>
