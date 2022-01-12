@@ -65,4 +65,22 @@
     <string name="action_dependency">Dependencias</string>
     <string name="action_section">Seccion</string>
     <string name="action_product">Producto</string>
+    <string name="menu_options">Opciones</string>
+    <!-- Preference Titles -->
+    <string name="messages_header">Messages</string>
+    <string name="sync_header">Sync</string>
+
+    <!-- Messages Preferences -->
+    <string name="signature_title">Your signature</string>
+    <string name="reply_title">Default reply action</string>
+
+    <!-- Sync Preferences -->
+    <string name="sync_title">Sync email periodically</string>
+    <string name="attachment_title">Download incoming attachments</string>
+    <string name="attachment_summary_on">Automatically download attachments for incoming emails
+    </string>
+    <string name="attachment_summary_off">Only download attachments when manually requested</string>
+    <string name="name_channel">inventory_channel</string>
+    <string name="notification_title_add_dependency">Dependencia añadida</string>
+    <string name="title_edit_dependency">Editar dependencia</string>
 </resources>

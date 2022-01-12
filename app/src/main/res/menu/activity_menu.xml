@@ -2,37 +2,43 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <item android:title="@string/action_inventory"
-        android:id="@+id/action_inventory"
-        app:showAsAction="never"
-        android:orderInCategory="1"
-        android:icon="@drawable/ic_action_ab_us"/>
-    <item android:title="@string/action_dependency"
-        android:id="@+id/action_dependency"
-        app:showAsAction="never"
-        android:orderInCategory="2"
-        android:icon="@drawable/ic_action_ab_us"/>
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/action_inventory"
+            android:icon="@drawable/ic_action_ab_us"
+            android:title="@string/action_inventory"
+            />
 
-    <item android:title="@string/action_section"
-        android:id="@+id/action_section"
-        app:showAsAction="never"
-        android:orderInCategory="3"
-        android:icon="@drawable/ic_action_ab_us"/>
+        <item
+            android:id="@+id/action_dependency"
+            android:icon="@drawable/ic_action_ab_us"
+            android:title="@string/action_dependency"
+             />
 
-    <item android:title="@string/action_product"
-        android:id="@+id/action_product"
-        app:showAsAction="never"
-        android:orderInCategory="4"
-        android:icon="@drawable/ic_action_ab_us"/>
+        <item
+            android:id="@+id/action_section"
+            android:icon="@drawable/ic_action_ab_us"
+            android:title="@string/action_section"
+             />
 
-    <item android:title="@string/acion_aboutus"
-        android:id="@+id/action_aboutus"
-        app:showAsAction="never"
-        android:orderInCategory="5"
-        android:icon="@drawable/ic_action_ab_us"/>
-    <item android:title="@string/action_settings"
-        app:showAsAction="never"
-        android:id="@+id/action_settings"
-        android:orderInCategory="6"
-        android:icon="@drawable/ic_action_settings"/>
+        <item
+            android:id="@+id/action_product"
+            android:icon="@drawable/ic_action_ab_us"
+
+            android:title="@string/action_product"
+            />
+    </group>
+    <item android:title="@string/menu_options">
+        <menu>
+            <item
+                android:id="@+id/action_aboutus"
+                android:icon="@drawable/ic_action_ab_us"
+                android:title="@string/acion_aboutus" />
+            <item
+                android:id="@+id/action_settings"
+                android:icon="@drawable/ic_action_settings"
+                android:title="@string/action_settings"
+                />
+        </menu>
+    </item>
 </menu>

@@ -5,8 +5,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.preference.PreferenceManager;
 
 import com.example.inventory.R;
+import com.example.inventory.data.model.User;
+import com.example.inventory.ui.MainActivity;
 import com.example.inventory.ui.login.LoginActivity;
 
 public class SplashActivity extends AppCompatActivity {
@@ -26,12 +29,20 @@ public class SplashActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                startLogin();
-            }
-        },WAIT_TIME);
+        if(!saveSession()) {
+            new Handler().postDelayed(() -> startLogin(), WAIT_TIME);
+        } else{
+            new Handler().postDelayed(() -> startApp(), WAIT_TIME);
+        }
+    }
+
+    /**
+     * Metodo que comprueba si el usuario ha iniciado sesion y se ha guardado un email
+     * en el fichero de preferencias DefaultSharedPreferences
+     * @return
+     */
+    private boolean saveSession() {
+        return (PreferenceManager.getDefaultSharedPreferences(this).contains(User.TAG));
     }
 
     private void startLogin() {
@@ -39,6 +50,14 @@ public class SplashActivity extends AppCompatActivity {
         // Voy a llamar de forma explicita al metodo finish() de una Activity, para eliminar
         // esta Activity de la pila de actividades, porque si el usuario pulsa BACK, no
         // queremos que la visualize
+        finish();
+    }
+
+    private void startApp(){
+        startActivity(new Intent(SplashActivity.this, MainActivity.class));
+        //Voy a llamar de forma explicita al metodo finisg de una activity para eliminar
+        //esta activity de la pila de actividades. porque si el usuario pulsa BACK
+        //no queremos que se visualice
         finish();
     }
 }

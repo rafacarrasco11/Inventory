@@ -5,6 +5,7 @@ import androidx.annotation.Nullable;
 import java.io.Serializable;
 
 public class Dependency implements Comparable, Serializable {
+    public static final String TAG="Dependency";
     private String name;
     private String shortName;
     private String description;

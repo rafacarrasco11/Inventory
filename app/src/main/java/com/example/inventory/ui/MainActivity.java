@@ -5,6 +5,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.drawable.RoundedBitmapDrawable;
 import androidx.core.graphics.drawable.RoundedBitmapDrawableFactory;
 import androidx.core.view.GravityCompat;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
+import androidx.navigation.fragment.NavHostFragment;
 
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
@@ -19,10 +22,12 @@ import android.widget.Toast;
 
 import com.example.inventory.R;
 import com.example.inventory.databinding.ActivityMainBinding;
+import com.google.android.material.navigation.NavigationView;
 
 public class MainActivity extends AppCompatActivity {
 
     private ActivityMainBinding binding;
+    private NavController navController;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +41,38 @@ public class MainActivity extends AppCompatActivity {
         // Personalizar navigation drawer
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_action_menu);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        // Inicializar el controlador de navegacion en la aplicacion
+        navController = Navigation.findNavController(this, R.id.nav_host_fragment);
+
+        // Metodo que configura el componente Navigationview
+        setupNavigationView();
+    }
+
+    private void setupNavigationView() {
+        binding.navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.action_inventory:
+                        showAddInventory();
+                        break;
+                    case R.id.action_dependency:
+                        showDependencies();
+                        break;
+                    case R.id.action_aboutus:
+                        showAboutUs();
+                        binding.navigationView.getCheckedItem().setChecked(false);
+                        break;
+                    case R.id.action_settings:
+                        showSettings();
+                        binding.navigationView.getCheckedItem().setChecked(false);
+                        break;
+                }
+                binding.drawerLayout.closeDrawer(GravityCompat.START);
+                return true;
+            }
+        });
     }
 
     @Override
@@ -76,4 +113,35 @@ public class MainActivity extends AppCompatActivity {
         img.setImageDrawable(roundedDrawable);
     }
 
+    /**
+     * mostrar el fragment Add Inventory
+     * @return
+     */
+    private void showAddInventory() {
+        navController.navigate(R.id.addInventoryFragment);
+    }
+
+    /**
+     * mostrar el fragment About Us
+     * @return
+     */
+    private void showAboutUs() {
+        navController.navigate(R.id.aboutUsFragment);
+    }
+
+    /**
+     * mostrar el fragment About Us
+     * @return
+     */
+    private void showDependencies() {
+        navController.navigate(R.id.depndencyListFragment);
+    }
+
+    /**
+     * mostrar el fragment Settings
+     * @return
+     */
+    private void showSettings() {
+        //navController.navigate(R.id.);
+    }
 }

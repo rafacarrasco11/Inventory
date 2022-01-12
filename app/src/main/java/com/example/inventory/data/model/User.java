@@ -5,6 +5,7 @@ package com.example.inventory.data.model;
  */
 public class User {
 
+    public static final String TAG = "User";
     private String user;
     private String password;
 

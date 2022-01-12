@@ -39,49 +39,9 @@ public class DashBoardFragment extends Fragment implements View.OnClickListener 
         return binding.getRoot();
     }
 
-    /**
-     * Metodo que lanza el metodo provocado en el evento click
-     * @param view
-     */
+
     @Override
-    public void onClick(View view) {
-        switch (view.getId()) {
-            case (R.id.imgBtnAboutUs): {
-                showAboutUs();
-                break;
-            }
-            case (R.id.imgBtnInventory): {
-                showAddInventory();
-                break;
-            }
-            case (R.id.imgBtnDependencies): {
-                showDependencies();
-                break;
-            }
-        }
-    }
+    public void onClick(View v) {
 
-    /**
-     * mostrar el fragment Add Inventory
-     * @return
-     */
-    private void showAddInventory() {
-        NavHostFragment.findNavController(this).navigate(R.id.action_dashBoardFragment_to_addInventoryFragment);
-    }
-
-    /**
-     * mostrar el fragment About Us
-     * @return
-     */
-    private void showAboutUs() {
-        NavHostFragment.findNavController(this).navigate(R.id.action_dashBoardFragment_to_aboutUsFragment);
-    }
-
-    /**
-     * mostrar el fragment About Us
-     * @return
-     */
-    private void showDependencies() {
-        NavHostFragment.findNavController(this).navigate(R.id.action_dashBoardFragment_to_depndencyListFragment);
     }
 }
