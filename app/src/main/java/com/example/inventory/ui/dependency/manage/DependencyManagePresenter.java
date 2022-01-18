@@ -2,6 +2,7 @@ package com.example.inventory.ui.dependency.manage;
 
 import com.example.inventory.data.model.Dependency;
 import com.example.inventory.ui.base.OnRepositoryCallback;
+import com.example.inventory.ui.base.OnRepositoryManageCallback;
 
 public class DependencyManagePresenter implements DependencyManageContract.Presenter, DependencyManageContract.OnInteractorListener {
 
@@ -15,14 +16,14 @@ public class DependencyManagePresenter implements DependencyManageContract.Prese
 
 
     @Override
-    public void add(Dependency d, OnRepositoryCallback callback) {
+    public void add(Dependency d, OnRepositoryManageCallback callback) {
         interactor.add(d, callback);
         callback.onSuccess("Se ha anadido la dependencia " + d.getShortName());
     }
 
     @Override
-    public void edit(Dependency d, OnRepositoryCallback callback) {
-        interactor.edit(d, callback);
+    public void edit(Dependency dEdit, Dependency d, OnRepositoryManageCallback callback) {
+        interactor.edit(dEdit, d, callback);
         callback.onSuccess("Se ha editado la dependencia " + d.getShortName());
     }
 
@@ -35,6 +36,21 @@ public class DependencyManagePresenter implements DependencyManageContract.Prese
     @Override
     public void onAddSuccess(String message) {
         view.onAddSuccess(message);
+    }
+
+    @Override
+    public void onAddFailure(String message) {
+        view.onAddFailure(message);
+    }
+
+    @Override
+    public void onEditFailure(String message) {
+        view.onEditFailure(message);
+    }
+
+    @Override
+    public void onEditSuccess() {
+        view.onEditSuccess();
     }
 
     //

@@ -3,6 +3,7 @@ package com.example.inventory.data.repository;
 import com.example.inventory.data.model.Dependency;
 import com.example.inventory.ui.base.OnRepositoryCallback;
 import com.example.inventory.ui.base.OnRepositoryListCallback;
+import com.example.inventory.ui.base.OnRepositoryManageCallback;
 import com.example.inventory.ui.dependency.DependencyListContract;
 import com.example.inventory.ui.dependency.manage.DependencyManageContract;
 
@@ -48,14 +49,25 @@ public class DependencyRepository implements DependencyListContract.Repository, 
     }
 
     @Override
-    public void add(Dependency d, OnRepositoryCallback callback) {
+    public void add(Dependency d, OnRepositoryManageCallback callback) {
         list.add(d);
-        callback.onSuccess("Dependencia " + d.getShortName() + " anadida");
+        callback.onAddSuccess("Dependencia " + d.getShortName() + " anadida");
+
     }
 
     @Override
-    public void edit(Dependency d, OnRepositoryCallback callback) {
+    public void edit(Dependency dEdit, Dependency d, OnRepositoryManageCallback callback) {
 
+        try {
+            this.list.get(this.list.indexOf(dEdit)).setName(d.getName());
+            this.list.get(this.list.indexOf(dEdit)).setShortName(d.getShortName());
+            this.list.get(this.list.indexOf(dEdit)).setImage(d.getImage());
+            this.list.get(this.list.indexOf(dEdit)).setDescription(d.getDescription());
+
+            callback.onEditSuccess();
+        } catch (Exception e) {
+            callback.onEditFailure(e.getMessage());
+        }
     }
 
     public static DependencyRepository getInstance(){

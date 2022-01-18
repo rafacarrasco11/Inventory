@@ -39,8 +39,8 @@ public class MainActivity extends AppCompatActivity {
         setHeaderRoundImage();
 
         // Personalizar navigation drawer
-        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_action_menu);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_action_menu);
 
         // Inicializar el controlador de navegacion en la aplicacion
         navController = Navigation.findNavController(this, R.id.nav_host_fragment);
@@ -93,9 +93,10 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             default:
                 //Si los fragment modifican el menu de la activity se devuelve false
+
                 return false;
         }
-        // return super.onOptionsItemSelected(item);
+        //return super.onOptionsItemSelected(item);
     }
 
     private void setHeaderRoundImage() {

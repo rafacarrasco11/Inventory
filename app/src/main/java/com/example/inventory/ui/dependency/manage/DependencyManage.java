@@ -16,6 +16,7 @@ import android.view.InflateException;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.inventory.InventoryApplication;
 import com.example.inventory.R;
@@ -42,19 +43,7 @@ public class DependencyManage extends Fragment implements DependencyManageContra
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        binding = FragmentDependencyManageBinding.inflate(inflater,container,false);
-
-        if (DependencyManageArgs.fromBundle(getArguments()).getDependency() != null ) {
-            // Editar
-            getActivity().setTitle(getString(R.string.title_edit_ependency));
-
-            initView(DependencyManageArgs.fromBundle(getArguments()).getDependency());
-
-            initFabEdit();
-        }
-        else {
-            initFabAdd();
-        }
+        binding = FragmentDependencyManageBinding.inflate(inflater);
 
         return binding.getRoot();
     }
@@ -62,16 +51,28 @@ public class DependencyManage extends Fragment implements DependencyManageContra
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        if (DependencyManageArgs.fromBundle(getArguments()).getDependency() != null ) {
+            Dependency dEdit = DependencyManageArgs.fromBundle(getArguments()).getDependency();
+            // Editar
+            getActivity().setTitle(getString(R.string.title_edit_ependency));
+
+            initView(dEdit);
+
+            initFabEdit(dEdit);
+        }
+        else {
+            initFabAdd();
+        }
     }
 
     private void initFabAdd() {
         binding.fab.setOnClickListener( v -> { presenter.add(getDependency(), this); });
     }
 
-    private void initFabEdit() {
+    private void initFabEdit(Dependency dEdit) {
         binding.fab.setImageResource(R.drawable.ic_baseline_edit_24);
         binding.tieDependencyShortName.setEnabled(false);
-        binding.fab.setOnClickListener( v -> { presenter.edit(getDependency(), this); });
+        binding.fab.setOnClickListener( v -> { presenter.edit(dEdit, getDependency(), this); });
     }
 
     /**
@@ -91,10 +92,10 @@ public class DependencyManage extends Fragment implements DependencyManageContra
 
     private Dependency getDependency() {
         Dependency d = new Dependency();
-        d.setShortName(binding.tilDependencyShortName.getEditText().toString());
-        d.setName(binding.tilDependencyName.getEditText().toString());
-        d.setDescription(binding.tilDependencyDescription.getEditText().toString());
-        d.setImage(binding.tilDependencyImage.getEditText().toString());
+        d.setShortName(binding.tilDependencyShortName.getEditText().getText().toString());
+        d.setName(binding.tilDependencyName.getEditText().getText().toString());
+        d.setDescription(binding.tilDependencyDescription.getEditText().getText().toString());
+        d.setImage(binding.tilDependencyImage.getEditText().getText().toString());
         return d;
     }
 
@@ -105,8 +106,8 @@ public class DependencyManage extends Fragment implements DependencyManageContra
     }
 
     @Override
-    public void editDependency(Dependency d) {
-        presenter.edit(d,this);
+    public void editDependency(Dependency dEdit, Dependency d) {
+        presenter.edit(dEdit, d,this);
     }
     //endregion
 
@@ -160,6 +161,21 @@ public class DependencyManage extends Fragment implements DependencyManageContra
         NotificationManager notificationManager = (NotificationManager) getActivity().getSystemService(Context.NOTIFICATION_SERVICE);
         notificationManager.notify(new Random().nextInt(), builder.build());
 
+        NavHostFragment.findNavController(this).navigateUp();
+    }
+
+    @Override
+    public void onAddFailure(String message) {
+        Toast.makeText(getActivity(), "Fallo al añadir dependencia", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onEditFailure(String message) {
+        Toast.makeText(getActivity(), "Fallo al editar la dependencia", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onEditSuccess() {
         NavHostFragment.findNavController(this).navigateUp();
     }
     //endregion

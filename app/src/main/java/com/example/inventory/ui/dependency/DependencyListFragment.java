@@ -164,6 +164,10 @@ public class DependencyListFragment extends Fragment implements DependencyListCo
     @Override
     public void onUndoSuccess(String message) {
         adapter.undo(deleted);
+        if (binding.llDependecyListShowNoData.getVisibility()==View.VISIBLE){
+            binding.llDependecyListShowNoData.setVisibility(View.GONE);
+            binding.rvDependency.setVisibility(View.VISIBLE);
+        }
     }
 
     @Override
