@@ -8,6 +8,8 @@ import androidx.core.view.GravityCompat;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.fragment.NavHostFragment;
+import androidx.navigation.ui.AppBarConfiguration;
+import androidx.navigation.ui.NavigationUI;
 
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
@@ -24,10 +26,15 @@ import com.example.inventory.R;
 import com.example.inventory.databinding.ActivityMainBinding;
 import com.google.android.material.navigation.NavigationView;
 
+import java.util.HashSet;
+import java.util.Set;
+
 public class MainActivity extends AppCompatActivity {
 
     private ActivityMainBinding binding;
     private NavController navController;
+
+    private AppBarConfiguration appBarConfiguration;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,7 +53,26 @@ public class MainActivity extends AppCompatActivity {
         navController = Navigation.findNavController(this, R.id.nav_host_fragment);
 
         // Metodo que configura el componente Navigationview
-        setupNavigationView();
+        // OPCION 1: MOSTRAR SIEMPRE ICONO HAMBURGUESA
+        //setupNavigationView();
+
+        // OPCION2: MOSTRAR LOS NIVELES DE FRAGMENTS MEDIANTE LA FLECHA
+        Set<Integer> topLevelDestination = new HashSet<>();
+        topLevelDestination.add(R.id.addInventoryFragment);
+        topLevelDestination.add(R.id.depndencyListFragment);
+        topLevelDestination.add(R.id.aboutUsFragment);
+        topLevelDestination.add(R.id.productFragment);
+        //topLevelDestination.add(R.id.settingsFragment);
+
+        // Configura la barra de accion para que funcione con NAVIGATIONUI
+        // Este metodo gestiona el evento click del navigatioView y se mostrara el id del fragment
+        // de navcontroller, SOLO SI, el id del item del menu es igual al id del FRAGMENT
+        NavigationUI.setupWithNavController(binding.navigationView, navController);
+
+        appBarConfiguration = new AppBarConfiguration.Builder(topLevelDestination).setOpenableLayout(binding.drawerLayout).build();
+
+        // Con este metodo gestionamos la BARRA DE ACCION, cuando hay varios niveles de navegacion
+        NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
     }
 
     private void setupNavigationView() {
@@ -54,13 +80,13 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
-                    case R.id.action_inventory:
+                    case R.id.addInventoryFragment:
                         showAddInventory();
                         break;
-                    case R.id.action_dependency:
+                    case R.id.depndencyListFragment:
                         showDependencies();
                         break;
-                    case R.id.action_aboutus:
+                    case R.id.aboutUsFragment:
                         showAboutUs();
                         binding.navigationView.getCheckedItem().setChecked(false);
                         break;
@@ -68,11 +94,26 @@ public class MainActivity extends AppCompatActivity {
                         showSettings();
                         binding.navigationView.getCheckedItem().setChecked(false);
                         break;
+                    case R.id.productFragment:
+                        showProduct();
+                        break;
                 }
                 binding.drawerLayout.closeDrawer(GravityCompat.START);
                 return true;
             }
         });
+    }
+
+
+
+    /**
+     * Cuando se pulsa sobre el icono de la felcha debe ser el componente NAVIGATIONUI quien
+     * gestione la navegacion hacia arriba
+     * @return
+     */
+    @Override
+    public boolean onSupportNavigateUp() {
+        return NavigationUI.navigateUp(navController,appBarConfiguration) || super.onSupportNavigateUp();
     }
 
     @Override
@@ -114,6 +155,15 @@ public class MainActivity extends AppCompatActivity {
         img.setImageDrawable(roundedDrawable);
     }
 
+
+    @Override
+    public void onBackPressed() {
+        if (binding.drawerLayout.isDrawerOpen(GravityCompat.START))
+            binding.drawerLayout.closeDrawer(GravityCompat.START);
+        else
+            super.onBackPressed();
+    }
+
     /**
      * mostrar el fragment Add Inventory
      * @return
@@ -128,6 +178,14 @@ public class MainActivity extends AppCompatActivity {
      */
     private void showAboutUs() {
         navController.navigate(R.id.aboutUsFragment);
+    }
+
+    /**
+     * mostrar el fragment Productos
+     * @return
+     */
+    private void showProduct() {
+        navController.navigate(R.id.productFragment);
     }
 
     /**

@@ -1,25 +1,46 @@
 package com.example.inventory.data.model;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.room.Entity;
+import androidx.room.Ignore;
+import androidx.room.PrimaryKey;
 
 import java.io.Serializable;
 
+@Entity
 public class Dependency implements Comparable, Serializable {
     public static final String TAG="Dependency";
+    @PrimaryKey(autoGenerate = true)
+    public int id;
+
+    @NonNull
     private String name;
+    @NonNull
     private String shortName;
+
     private String description;
     private String image;
 
-    public Dependency() {
-
+    public Dependency(int id, String name, String shortName, String description, String image) {
+        this.id = id;
+        this.name = name;
+        this.shortName = shortName;
+        this.description = description;
+        this.image = image;
     }
 
+    @Ignore
     public Dependency(String name, String shortName, String description, String image) {
         this.name = name;
         this.shortName = shortName;
         this.description = description;
         this.image = image;
+    }
+
+    @Ignore
+    public Dependency() {
+
     }
 
     public String getName() {

@@ -40,4 +40,9 @@
             app:argType="com.example.inventory.data.model.Dependency"
             app:nullable="true" />
     </fragment>
+    <fragment
+        android:id="@+id/productFragment"
+        android:name="com.example.inventory.ui.product.ProductFragment"
+        android:label="fragment_product"
+        tools:layout="@layout/fragment_product" />
 </navigation>

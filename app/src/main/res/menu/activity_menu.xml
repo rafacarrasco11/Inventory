@@ -4,13 +4,13 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/action_inventory"
+            android:id="@+id/addInventoryFragment"
             android:icon="@drawable/ic_action_ab_us"
             android:title="@string/action_inventory"
             />
 
         <item
-            android:id="@+id/action_dependency"
+            android:id="@+id/depndencyListFragment"
             android:icon="@drawable/ic_action_ab_us"
             android:title="@string/action_dependency"
              />
@@ -22,16 +22,15 @@
              />
 
         <item
-            android:id="@+id/action_product"
+            android:id="@+id/productFragment"
             android:icon="@drawable/ic_action_ab_us"
-
             android:title="@string/action_product"
             />
     </group>
     <item android:title="@string/menu_options">
         <menu>
             <item
-                android:id="@+id/action_aboutus"
+                android:id="@+id/aboutUsFragment"
                 android:icon="@drawable/ic_action_ab_us"
                 android:title="@string/acion_aboutus" />
             <item
