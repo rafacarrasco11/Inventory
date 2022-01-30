@@ -1,37 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/frameLayout2"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="20dp"
-    tools:context=".ui.dependency.manage.DependencyManage">
+    tools:context=".ui.section.manage.SectionManageFragment">
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/til_dependency_name"
+        android:id="@+id/til_section_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_margin="20dp">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/tie_section_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Nombre"
-            android:id="@+id/tie_dependency_name"/>
+            android:hint="Nombre" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/til_dependency_shortName"
+        android:id="@+id/til_section_Shortname"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/til_section_name"
+        android:layout_margin="20dp">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/tie_section_Shortname"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/tie_dependency_shortName"
             android:hint="Nombre Corto" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -39,29 +42,18 @@
         android:id="@+id/til_dependency_description"
         android:layout_width="match_parent"
         android:layout_height="250dp"
-        android:layout_marginTop="20dp">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/til_section_Shortname"
+        android:layout_margin="20dp">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/tie_dependency_description"
             android:layout_width="match_parent"
             android:layout_height="250dp"
-            android:hint="Descripcion"
-            />
+            android:hint="Descripcion" />
     </com.google.android.material.textfield.TextInputLayout>
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/til_dependency_image"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp">
-
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/tie_dependency_image"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Imagen" />
-    </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab"
@@ -71,6 +63,17 @@
         android:layout_margin="@dimen/fab_margin"
         android:clickable="true"
         android:elevation="@dimen/fab_elevation"
-        android:src="@drawable/ic_baseline_edit_24" />
+        android:src="@drawable/ic_baseline_edit_24"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
-</LinearLayout>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/llDependecyInSection"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/til_dependency_description"
+        android:layout_margin="20dp"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

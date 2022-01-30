@@ -29,9 +29,12 @@
         <entry key="app/src/main/res/layout/fragment_product_description.xml" value="0.19293478260869565" />
         <entry key="app/src/main/res/layout/fragment_product_info.xml" value="0.21965579710144928" />
         <entry key="app/src/main/res/layout/fragment_product_map.xml" value="0.21965579710144928" />
+        <entry key="app/src/main/res/layout/fragment_section.xml" value="0.20018115942028986" />
+        <entry key="app/src/main/res/layout/fragment_section_manage.xml" value="0.22327898550724637" />
         <entry key="app/src/main/res/layout/layout_progressbar_horizontal.xml" value="0.19882246376811594" />
         <entry key="app/src/main/res/layout/layout_progrssbar_circular.xml" value="0.19882246376811594" />
         <entry key="app/src/main/res/layout/menu_header.xml" value="0.2617753623188406" />
+        <entry key="app/src/main/res/layout/section_item.xml" value="0.22327898550724637" />
         <entry key="app/src/main/res/menu/activity_menu.xml" value="0.2" />
         <entry key="app/src/main/res/menu/content_menu.xml" value="0.26458333333333334" />
         <entry key="app/src/main/res/menu/fragmentlist_menu.xml" value="0.35885416666666664" />

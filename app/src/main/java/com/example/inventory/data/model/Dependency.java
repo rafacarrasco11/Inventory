@@ -11,6 +11,7 @@ import java.io.Serializable;
 @Entity
 public class Dependency implements Comparable, Serializable {
     public static final String TAG="Dependency";
+
     @PrimaryKey(autoGenerate = true)
     public int id;
 
@@ -41,6 +42,14 @@ public class Dependency implements Comparable, Serializable {
     @Ignore
     public Dependency() {
 
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getName() {

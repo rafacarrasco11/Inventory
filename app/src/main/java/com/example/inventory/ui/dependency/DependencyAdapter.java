@@ -57,14 +57,17 @@ public class DependencyAdapter extends RecyclerView.Adapter<DependencyAdapter.Vi
 
     @Override
     public void onBindViewHolder(@NonNull DependencyAdapter.ViewHolder holder, int position) {
+        holder.tvName.setText(list.get(position).getName());
         TextDrawable drawable = TextDrawable.builder()
                 .beginConfig()
                 .toUpperCase()
                 .bold()
                 .endConfig()
                 .buildRound(list.get(position).getName().substring(0,1), ColorGenerator.DEFAULT.getRandomColor());
-        holder.tvName.setText(list.get(position).getName());
+
         holder.imgvIcon.setImageDrawable(drawable);
+
+        holder.tvName.setText(list.get(position).getName());
 
         // Cuando se actualiza la lista, se indica a la clase Holder que dependencia es, y quien es su listener
         holder.bind(list.get(position), listener);

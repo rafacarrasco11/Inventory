@@ -26,4 +26,6 @@
     <dimen name="tvUser_header_marginTop">10dp</dimen>
     <dimen name="tvUser_header_textSize">30sp</dimen>
     <dimen name="tvEmail_header_textSize">20sp</dimen>
+    <dimen name="ll_sectionItem_marginStart">10dp</dimen>
+    <dimen name="ll_sectionItem_textSize">18sp</dimen>
 </resources>

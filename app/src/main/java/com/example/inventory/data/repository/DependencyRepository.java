@@ -1,5 +1,7 @@
 package com.example.inventory.data.repository;
 
+import com.example.inventory.data.dao.DependencyDAO;
+import com.example.inventory.data.database.InventoryDatabase;
 import com.example.inventory.data.model.Dependency;
 import com.example.inventory.ui.base.OnRepositoryCallback;
 import com.example.inventory.ui.base.OnRepositoryListCallback;
@@ -9,16 +11,19 @@ import com.example.inventory.ui.dependency.manage.DependencyManageContract;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 public class DependencyRepository implements DependencyListContract.Repository, DependencyManageContract.Repository {
 
     private static DependencyRepository instance;
     private OnRepositoryListCallback callback;
     private ArrayList<Dependency> list;
+    private DependencyDAO dependencyDAO;
 
     private DependencyRepository(){
         list = new ArrayList<>();
-        initialize();
+        dependencyDAO = InventoryDatabase.getDatabase().dependencyDAO();
     }
 
     private void initialize() {
@@ -31,34 +36,46 @@ public class DependencyRepository implements DependencyListContract.Repository, 
 
     @Override
     public void getList(OnRepositoryListCallback callback) {
-        callback.onSuccess(list);
+        try {
+            this.list = (ArrayList<Dependency>) InventoryDatabase.databaseWriteExecutor.submit(() -> dependencyDAO.select()).get();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        callback.onSuccess(this.list);
     }
 
     @Override
     public void delete(Dependency dependency, OnRepositoryListCallback callback) {
-        list.remove(dependency);
+        InventoryDatabase.databaseWriteExecutor.submit(() -> dependencyDAO.delete(dependency));
+        //list.remove(dependency);
 
         callback.onDeleteSuccess("Se ha eliminado la dependencia: " + dependency.getName());
     }
 
     @Override
     public void undo(Dependency dependency, OnRepositoryListCallback callback) {
-        list.add(dependency);
+        InventoryDatabase.databaseWriteExecutor.submit(() -> dependencyDAO.insert(dependency));
+        //list.add(dependency);
 
         callback.onUndoSuccess("Se ha recuperado la dependencia: " + dependency.getName());
     }
 
     @Override
     public void add(Dependency d, OnRepositoryManageCallback callback) {
-        list.add(d);
+        InventoryDatabase.databaseWriteExecutor.submit(() -> dependencyDAO.insert(d));
+        //list.add(d);
         callback.onAddSuccess("Dependencia " + d.getShortName() + " anadida");
 
     }
 
     @Override
     public void edit(Dependency dEdit, Dependency d, OnRepositoryManageCallback callback) {
+        InventoryDatabase.databaseWriteExecutor.submit(() -> dependencyDAO.update(d));
 
-        try {
+        callback.onEditSuccess();
+        /*try {
             this.list.get(this.list.indexOf(dEdit)).setName(d.getName());
             this.list.get(this.list.indexOf(dEdit)).setShortName(d.getShortName());
             this.list.get(this.list.indexOf(dEdit)).setImage(d.getImage());
@@ -67,7 +84,9 @@ public class DependencyRepository implements DependencyListContract.Repository, 
             callback.onEditSuccess();
         } catch (Exception e) {
             callback.onEditFailure(e.getMessage());
-        }
+        }*/
+
+
     }
 
     public static DependencyRepository getInstance(){

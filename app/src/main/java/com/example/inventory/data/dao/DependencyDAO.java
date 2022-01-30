@@ -8,6 +8,7 @@ import androidx.room.Update;
 
 import com.example.inventory.data.model.Dependency;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Dao

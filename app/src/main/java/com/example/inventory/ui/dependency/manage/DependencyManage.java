@@ -92,6 +92,11 @@ public class DependencyManage extends Fragment implements DependencyManageContra
 
     private Dependency getDependency() {
         Dependency d = new Dependency();
+
+        // Solo si estamos en editar se recoge el ID, en caso contrario se deja que ROOM autogener un id
+        if (DependencyManageArgs.fromBundle(getArguments()).getDependency() != null )
+            d.setId(DependencyManageArgs.fromBundle(getArguments()).getDependency().getId());
+
         d.setShortName(binding.tilDependencyShortName.getEditText().getText().toString());
         d.setName(binding.tilDependencyName.getEditText().getText().toString());
         d.setDescription(binding.tilDependencyDescription.getEditText().getText().toString());

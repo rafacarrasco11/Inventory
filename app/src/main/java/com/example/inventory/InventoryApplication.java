@@ -6,6 +6,8 @@ import android.app.NotificationManager;
 import android.graphics.Color;
 import android.os.Build;
 
+import com.example.inventory.data.database.InventoryDatabase;
+
 public class InventoryApplication extends Application {
     public static final String IDCHANNEL = "345767";
 
@@ -13,6 +15,7 @@ public class InventoryApplication extends Application {
     public void onCreate() {
         super.onCreate();
         createNotificationChannel();
+        InventoryDatabase.create(this);
     }
 
     private void createNotificationChannel() {

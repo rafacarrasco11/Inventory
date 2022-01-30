@@ -55,7 +55,7 @@ public class DependencyListPresenter implements  DependencyListContract.Presente
 
     @Override
     public void onFailure(String message) {
-
+        view.onFailure(message);
     }
 
     @Override
