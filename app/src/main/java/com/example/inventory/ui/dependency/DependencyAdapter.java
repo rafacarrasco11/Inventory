@@ -28,13 +28,15 @@ public class DependencyAdapter extends RecyclerView.Adapter<DependencyAdapter.Vi
     private ArrayList<Dependency> list;
     OnManagerDependencyListener listener;
 
-    interface OnManagerDependencyListener{
+    public interface OnManagerDependencyListener{
 
         // Pulsacion corta para editar
         void onEditDependency(Dependency dependency);
         // Pulsacion larga opara eliminar
 
         void onDeleteDependency(Dependency dependency);
+
+        void onSelectDependency(Dependency dependency);
     }
     public DependencyAdapter(ArrayList<Dependency> list, OnManagerDependencyListener listener) {
         this.list = new ArrayList<Dependency>();

@@ -15,7 +15,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 // 1. Definir la configuracion de la base de datos
-@Database(entities = {Dependency.class, Section.class}, version = 2)
+@Database(entities = {Dependency.class, Section.class}, version = 1)
 public abstract class InventoryDatabase extends RoomDatabase {
 
     //2. Crear los metodos de obtencion de los DAO

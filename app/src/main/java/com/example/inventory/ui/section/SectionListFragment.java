@@ -19,14 +19,9 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.example.inventory.R;
-import com.example.inventory.data.model.Dependency;
 import com.example.inventory.data.model.Section;
-import com.example.inventory.databinding.FragmentProductBinding;
 import com.example.inventory.databinding.FragmentSectionBinding;
-import com.example.inventory.ui.base.BaseDialogFragment;
-import com.example.inventory.ui.dependency.DependencyListFragment;
 import com.example.inventory.ui.dependency.DependencyListFragmentDirections;
-import com.example.inventory.ui.section.manage.SectionManageFragmentArgs;
 import com.google.android.material.snackbar.BaseTransientBottomBar;
 import com.google.android.material.snackbar.Snackbar;
 
@@ -47,7 +42,10 @@ public class SectionListFragment extends Fragment implements SectionListContract
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         binding.fab.setOnClickListener(v -> {
-            // NO FUNCIONA SectionListFragmentDirections
+            SectionListFragmentDirections.ActionSectionListFragmentToSectionManageFragment action
+                    = SectionListFragmentDirections.actionSectionListFragmentToSectionManageFragment(null);
+
+            NavHostFragment.findNavController(this).navigate(action);
         });
         initRvSection();
     }
@@ -91,7 +89,7 @@ public class SectionListFragment extends Fragment implements SectionListContract
     @Override
     public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
-        inflater.inflate(R.menu.fragmentlist_menu, menu);
+        inflater.inflate(R.menu.sectionlist_menu, menu);
     }
 
     @Override
@@ -177,6 +175,10 @@ public class SectionListFragment extends Fragment implements SectionListContract
     public void onEditSection(Section section) {
         Toast.makeText(getActivity(), "Editando la seccion " + section.getName(), Toast.LENGTH_SHORT).show();
         // NO FUNCIONA SectionListFragmentDirections
+        SectionListFragmentDirections.ActionSectionListFragmentToSectionManageFragment action
+                = SectionListFragmentDirections.actionSectionListFragmentToSectionManageFragment(section);
+
+        NavHostFragment.findNavController(this).navigate(action);
     }
 
     @Override

@@ -34,7 +34,7 @@
         android:id="@+id/dependencyManage"
         android:name="com.example.inventory.ui.dependency.manage.DependencyManage"
         android:label="fragment_dependency_manage"
-        tools:layout="@layout/fragment_dependency_manage" >
+        tools:layout="@layout/fragment_dependency_manage">
         <argument
             android:name="dependency"
             app:argType="com.example.inventory.data.model.Dependency"
@@ -44,16 +44,16 @@
         android:id="@+id/productFragment"
         android:name="com.example.inventory.ui.product.ProductFragment"
         android:label="fragment_product"
-        tools:layout="@layout/fragment_product" >
-        <action
-            android:id="@+id/action_productFragment_to_sectionManageFragment"
-            app:destination="@id/sectionManageFragment" />
-    </fragment>
+        tools:layout="@layout/fragment_product" />
     <fragment
         android:id="@+id/sectionListFragment"
         android:name="com.example.inventory.ui.section.SectionListFragment"
         android:label="fragment_section"
-        tools:layout="@layout/fragment_section" />
+        tools:layout="@layout/fragment_section" >
+        <action
+            android:id="@+id/action_sectionListFragment_to_sectionManageFragment"
+            app:destination="@id/sectionManageFragment" />
+    </fragment>
     <fragment
         android:id="@+id/sectionManageFragment"
         android:name="com.example.inventory.ui.section.manage.SectionManageFragment"
@@ -62,6 +62,6 @@
         <argument
             android:name="section"
             app:argType="com.example.inventory.data.model.Section"
-            app:nullable="true"/>
+            app:nullable="true" />
     </fragment>
 </navigation>

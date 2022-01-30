@@ -16,7 +16,7 @@
              />
 
         <item
-            android:id="@+id/action_section"
+            android:id="@+id/sectionListFragment"
             android:icon="@drawable/ic_action_ab_us"
             android:title="@string/action_section"
              />

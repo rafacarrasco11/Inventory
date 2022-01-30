@@ -6,8 +6,8 @@ import com.example.inventory.ui.base.OnRepositoryManageCallback;
 
 public interface SectionManageContract {
     interface View extends OnInteractorListener {
-        void addDependency(Section section);
-        void editDependency(Section sectionEdit, Section section);
+        void addSection(Section section);
+        void editSection(Section sectionEdit, Section section);
     }
 
     interface Presenter {

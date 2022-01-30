@@ -225,6 +225,11 @@ public class DependencyListFragment extends Fragment implements DependencyListCo
         });
     }
 
+    @Override
+    public void onSelectDependency(Dependency dependency) {
+
+    }
+
     //endregion
 
 }

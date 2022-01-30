@@ -84,4 +84,10 @@
     <string name="notification_title_add_dependency">Dependencia añadida</string>
     <string name="title_edit_dependency">Editar dependencia</string>
     <string name="tvnoDataSection">No hay secciones añadidas</string>
+    <string name="title_edit_section">Editar Seccion</string>
+    <string name="notification_title_add_section">Seccion añadida</string>
+    <string name="action_order_sectionbyname">Ordenar Secciones</string>
+    <string name="tvTittleDepId_text">Id: </string>
+    <string name="tvTittleSectionFragment_text" >Secciones: </string>
+    <string name="tvTittleDepName_text">Nombre: </string>
 </resources>

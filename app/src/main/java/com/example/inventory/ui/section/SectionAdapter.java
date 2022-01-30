@@ -44,7 +44,7 @@ public class SectionAdapter extends RecyclerView.Adapter<SectionAdapter.ViewHold
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.tvName.setText(list.get(position).getName());
+
         TextDrawable drawable = TextDrawable.builder()
                 .beginConfig()
                 .toUpperCase()
@@ -52,10 +52,9 @@ public class SectionAdapter extends RecyclerView.Adapter<SectionAdapter.ViewHold
                 .endConfig()
                 .buildRound(list.get(position).getName().substring(0,1), ColorGenerator.DEFAULT.getRandomColor());
 
-        holder.imageIcon.setImageDrawable(drawable);
-
-        holder.tvName.setText(list.get(position).getName());
-
+        holder.imgIconSection.setImageDrawable(drawable);
+        holder.tvNameSection.setText(list.get(position).getName());
+        holder.tvIdDependency.setText(String.valueOf(list.get(position).getDependency()));
         // Cuando se actualiza la lista, se indica a la clase Holder que dependencia es, y quien es su listener
         holder.bind(list.get(position), listener);
     }
@@ -66,13 +65,15 @@ public class SectionAdapter extends RecyclerView.Adapter<SectionAdapter.ViewHold
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        TextView tvName;
-        ImageView imageIcon;
+        TextView tvNameSection;
+        TextView tvIdDependency;
+        ImageView imgIconSection;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            tvName = itemView.findViewById(R.id.tvNameSection) ;
-            imageIcon = itemView.findViewById(R.id.imgIconSection) ;
+            tvNameSection = itemView.findViewById(R.id.tvNameSection) ;
+            tvIdDependency = itemView.findViewById(R.id.tvIdDependency) ;
+            imgIconSection = itemView.findViewById(R.id.imgIconSection) ;
         }
 
         public void bind(Section section, OnManagerSectionListener listener) {
@@ -83,6 +84,7 @@ public class SectionAdapter extends RecyclerView.Adapter<SectionAdapter.ViewHold
 
             itemView.setOnClickListener(v -> {
                 listener.onEditSection(section);
+
             });
         }
     }

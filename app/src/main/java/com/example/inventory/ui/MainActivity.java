@@ -97,12 +97,17 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.productFragment:
                         showProduct();
                         break;
+                    case R.id.sectionListFragment:
+                        showSection();
+                        binding.navigationView.getCheckedItem().setChecked(false);
+                        break;
                 }
                 binding.drawerLayout.closeDrawer(GravityCompat.START);
                 return true;
             }
         });
     }
+
 
 
 
@@ -202,5 +207,13 @@ public class MainActivity extends AppCompatActivity {
      */
     private void showSettings() {
         //navController.navigate(R.id.);
+    }
+
+    /**
+     * mostrar el fragment Section
+     * @return
+     */
+    private void showSection() {
+        navController.navigate(R.id.sectionListFragment);
     }
 }
