@@ -76,13 +76,15 @@ public class SectionManageFragment extends Fragment implements SectionManageCont
         list = new ArrayList<>();
         dependencyDAO = InventoryDatabase.getDatabase().dependencyDAO();
         try {
-            list = (ArrayList<Dependency>) InventoryDatabase.databaseWriteExecutor.submit(() -> dependencyDAO.select()).get();
+            // Obtener las dependencias de la base de datos
+            list = InventoryDatabase.databaseWriteExecutor.submit(() -> dependencyDAO.select()).get();
         } catch (ExecutionException e) {
             e.printStackTrace();
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
 
+        // Actualizar la lista
         adapter.updateList(list);
     }
 

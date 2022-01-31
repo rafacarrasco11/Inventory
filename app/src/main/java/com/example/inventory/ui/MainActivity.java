@@ -62,6 +62,7 @@ public class MainActivity extends AppCompatActivity {
         topLevelDestination.add(R.id.depndencyListFragment);
         topLevelDestination.add(R.id.aboutUsFragment);
         topLevelDestination.add(R.id.productFragment);
+        topLevelDestination.add(R.id.sectionListFragment);
         //topLevelDestination.add(R.id.settingsFragment);
 
         // Configura la barra de accion para que funcione con NAVIGATIONUI
