@@ -1,6 +1,7 @@
 package com.example.inventory.ui.dependency;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -10,6 +11,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.databinding.DataBindingUtil;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.amulyakhare.textdrawable.TextDrawable;
@@ -17,6 +20,8 @@ import com.amulyakhare.textdrawable.util.ColorGenerator;
 import com.example.inventory.R;
 import com.example.inventory.data.model.Dependency;
 import com.example.inventory.data.model.DependencyComparator;
+import com.example.inventory.databinding.ActivityMainBinding;
+import com.example.inventory.databinding.DependencyItemBinding;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -24,9 +29,10 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
-public class DependencyAdapter extends RecyclerView.Adapter<DependencyAdapter.ViewHolder>  {
+public class DependencyAdapter extends RecyclerView.Adapter<DependencyAdapter.ViewHolder> {
     private ArrayList<Dependency> list;
     OnManagerDependencyListener listener;
+
 
     public interface OnManagerDependencyListener{
 
@@ -43,6 +49,8 @@ public class DependencyAdapter extends RecyclerView.Adapter<DependencyAdapter.Vi
         this.listener = listener;
     }
 
+
+
     /**
      * Se llama a este metodo tantas veces como elelemtos se visualicen el la pantalla/ elementos
      * del array list, del dispositivo SIEMPRE y CUANDO getItemCount>0
@@ -53,13 +61,26 @@ public class DependencyAdapter extends RecyclerView.Adapter<DependencyAdapter.Vi
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        // CON DATABINDING
+        DependencyItemBinding binding = DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()),
+                R.layout.dependency_item, parent, false);
+
+        return new ViewHolder(binding);
+
+        // SIN DATABINDING
+        /*
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.dependency_item, parent, false);
         return new ViewHolder(view);
+        */
     }
 
     @Override
     public void onBindViewHolder(@NonNull DependencyAdapter.ViewHolder holder, int position) {
-        holder.tvName.setText(list.get(position).getName());
+        // CON DATABINDING
+
+
+        // SIN DATABINDING
+        //holder.tvName.setText(list.get(position).getName());
         TextDrawable drawable = TextDrawable.builder()
                 .beginConfig()
                 .toUpperCase()
@@ -67,16 +88,21 @@ public class DependencyAdapter extends RecyclerView.Adapter<DependencyAdapter.Vi
                 .endConfig()
                 .buildRound(list.get(position).getName().substring(0,1), ColorGenerator.DEFAULT.getRandomColor());
 
-        holder.imgvIcon.setImageDrawable(drawable);
+        this.list.get(position).setImage(drawable);
+
+        /*holder.imgvIcon.setImageDrawable(drawable);
 
         holder.tvName.setText(list.get(position).getName());
 
         // Cuando se actualiza la lista, se indica a la clase Holder que dependencia es, y quien es su listener
         holder.bind(list.get(position), listener);
 
-        // POR SI EN VEZ DE EL ITEM ENTERO, SOLO QUEREMOS QUE LA PULSACION SE APLIQUE A UN ELEMENTO DEL ITEM
+        // POR SI EN VEZ DE EL ITEM ENTERO, SOLO QUE
+        REMOS QUE LA PULSACION SE APLIQUE A UN ELEMENTO DEL ITEM
         //holder.imgvIcon.setOnClickListener();
+        */
 
+        holder.bind(this.list.get(position),listener);
     }
 
     /**
@@ -94,13 +120,11 @@ public class DependencyAdapter extends RecyclerView.Adapter<DependencyAdapter.Vi
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        TextView tvName;
-        ImageView imgvIcon;
-        public ViewHolder(@NonNull View itemView) {
-            super(itemView);
-            tvName=itemView.findViewById(R.id.tvName);
-            imgvIcon=itemView.findViewById(R.id.imgvIcon);
+        DependencyItemBinding mBinding;
+        public ViewHolder(DependencyItemBinding binding) {
+            super(binding.getRoot());
 
+            this.mBinding = binding;
             //1º OPCION: SOLO QUIERO COMTROLAR EL EVENTO ON CLICK, COGE EL ITEM COMPLETO PARA LA PULSACION
             //Esto solo sirve para mostrar un mensaje genérico, ya que aqui no tenemos las posiciones
             //Luego esto no es posible porque necesitamos la posicion o la dependencia, solución: metodo bind
@@ -112,6 +136,10 @@ public class DependencyAdapter extends RecyclerView.Adapter<DependencyAdapter.Vi
             });*/
         }
 
+        public void bindConnection(Dependency dependency) {
+            mBinding.setDependency(dependency);
+        }
+
         /**
          * Todos los metodos que se crean en la clase ViewHolder tienen acceso al elemento
          * View que contiene la variable itemView, es decir la vista de cada elemento.
@@ -119,6 +147,7 @@ public class DependencyAdapter extends RecyclerView.Adapter<DependencyAdapter.Vi
          * @param listener
          */
         public void bind(Dependency dependency, OnManagerDependencyListener listener) {
+            mBinding.setDependency(dependency);
             itemView.setOnClickListener(new View.OnClickListener(){
                 @Override
                 public void onClick(View view) {
@@ -135,7 +164,6 @@ public class DependencyAdapter extends RecyclerView.Adapter<DependencyAdapter.Vi
                 }
             });
         }
-
 
     }
     //region METODOS ACTUALIZA VISTA

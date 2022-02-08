@@ -84,7 +84,7 @@ public class DependencyManage extends Fragment implements DependencyManageContra
         binding.tieDependencyShortName.setEnabled(true);
         binding.tieDependencyName.setText(dependency.getName());
         binding.tieDependencyDescription.setText(dependency.getDescription());
-        binding.tieDependencyImage.setText(dependency.getImage());
+        //binding.tieDependencyImage.setText(dependency.getImage());
     }
         /*
         Dada una vista, se recoge la dependencia que el usuario a intreoducido o modificado
@@ -100,7 +100,7 @@ public class DependencyManage extends Fragment implements DependencyManageContra
         d.setShortName(binding.tilDependencyShortName.getEditText().getText().toString());
         d.setName(binding.tilDependencyName.getEditText().getText().toString());
         d.setDescription(binding.tilDependencyDescription.getEditText().getText().toString());
-        d.setImage(binding.tilDependencyImage.getEditText().getText().toString());
+        //d.setImage(binding.tilDependencyImage.getEditText().getText().toString());
         return d;
     }
 

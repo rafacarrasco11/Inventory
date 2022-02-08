@@ -26,13 +26,13 @@ public class DependencyRepository implements DependencyListContract.Repository, 
         dependencyDAO = InventoryDatabase.getDatabase().dependencyDAO();
     }
 
-    private void initialize() {
+    /*private void initialize() {
         //list.add(new Dependency("AAula 1º GSDAM","1GSDAM","A",""));
         list.add(new Dependency("BAula 2º GSDAM","1GSDAM","D",""));
         list.add(new Dependency("CAula 1º GSDAM","2GSDAM","C",""));
         list.add(new Dependency("AAula 2º GSDAM","2GSDAM","B",""));
         list.add(new Dependency("DAula 3º GSDAM","2GSDAM","A",""));
-    }
+    }*/
 
     @Override
     public void getList(OnRepositoryListCallback callback) {

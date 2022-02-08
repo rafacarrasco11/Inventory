@@ -18,7 +18,7 @@
         <entry key="app/src/main/res/layout/activity_sign_up.xml" value="0.25905797101449274" />
         <entry key="app/src/main/res/layout/activity_splash.xml" value="0.25" />
         <entry key="app/src/main/res/layout/content_splash.xml" value="0.23369565217391305" />
-        <entry key="app/src/main/res/layout/dependency_item.xml" value="0.26268115942028986" />
+        <entry key="app/src/main/res/layout/dependency_item.xml" value="0.1" />
         <entry key="app/src/main/res/layout/dependency_item_reduced.xml" value="0.27219202898550726" />
         <entry key="app/src/main/res/layout/fragment_about_us.xml" value="0.2513586956521739" />
         <entry key="app/src/main/res/layout/fragment_add_inventory.xml" value="0.25" />

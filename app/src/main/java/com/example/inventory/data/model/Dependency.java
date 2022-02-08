@@ -6,6 +6,8 @@ import androidx.room.Entity;
 import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
+import com.amulyakhare.textdrawable.TextDrawable;
+
 import java.io.Serializable;
 
 @Entity
@@ -21,18 +23,19 @@ public class Dependency implements Comparable, Serializable {
     private String shortName;
 
     private String description;
-    private String image;
 
-    public Dependency(int id, String name, String shortName, String description, String image) {
+    @Ignore
+    private TextDrawable image;
+
+    public Dependency(int id, String name, String shortName, String description) {
         this.id = id;
         this.name = name;
         this.shortName = shortName;
         this.description = description;
-        this.image = image;
     }
 
     @Ignore
-    public Dependency(String name, String shortName, String description, String image) {
+    public Dependency(String name, String shortName, String description, TextDrawable image) {
         this.name = name;
         this.shortName = shortName;
         this.description = description;
@@ -52,19 +55,21 @@ public class Dependency implements Comparable, Serializable {
         this.id = id;
     }
 
+    @NonNull
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
+    public void setName(@NonNull String name) {
         this.name = name;
     }
 
+    @NonNull
     public String getShortName() {
         return shortName;
     }
 
-    public void setShortName(String shortName) {
+    public void setShortName(@NonNull String shortName) {
         this.shortName = shortName;
     }
 
@@ -76,11 +81,11 @@ public class Dependency implements Comparable, Serializable {
         this.description = description;
     }
 
-    public String getImage() {
+    public TextDrawable getImage() {
         return image;
     }
 
-    public void setImage(String image) {
+    public void setImage(TextDrawable image) {
         this.image = image;
     }
 

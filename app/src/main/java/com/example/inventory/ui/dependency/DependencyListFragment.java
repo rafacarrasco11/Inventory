@@ -1,9 +1,11 @@
 package com.example.inventory.ui.dependency;
 
+import android.os.AsyncTask;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentResultListener;
 import androidx.navigation.fragment.NavHostFragment;
@@ -20,6 +22,7 @@ import android.widget.Toast;
 
 import com.example.inventory.R;
 import com.example.inventory.data.model.Dependency;
+import com.example.inventory.databinding.ActivityMainBinding;
 import com.example.inventory.databinding.FragmentDependencyListBinding;
 import com.example.inventory.ui.base.BaseDialogFragment;
 import com.example.inventory.ui.base.OnRepositoryListCallback;
@@ -37,6 +40,9 @@ public class DependencyListFragment extends Fragment implements DependencyListCo
     private OnRepositoryListCallback callback;
     // Una vez que el repositorio elimina la dependencia, el adapter debe eliminar la dependencia
     private Dependency deleted;
+
+    private RecyclerView mRecyclerView;
+
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
