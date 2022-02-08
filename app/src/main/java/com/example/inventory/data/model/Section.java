@@ -8,6 +8,7 @@ import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 import androidx.room.Relation;
 
+import com.amulyakhare.textdrawable.TextDrawable;
 import com.google.android.material.transition.platform.SlideDistanceProvider;
 
 import java.io.Serializable;
@@ -28,20 +29,24 @@ public class Section implements Comparable, Serializable {
 
     @NonNull
     String description;
-    String image;
+    @Ignore
+    TextDrawable image;
+
+    @Ignore
+    String dependencyId;
 
 
-    public Section(long id, @NonNull String name, @NonNull String shortName, long dependency, @NonNull String description, String image) {
+    public Section(long id, @NonNull String name, @NonNull String shortName, long dependency, @NonNull String description) {
         this.id = id;
         this.name = name;
         this.shortName = shortName;
         this.dependency = dependency;
         this.description = description;
-        this.image = image;
+        this.dependencyId = String.valueOf(this.dependency);
     }
 
     @Ignore
-    public Section(@NonNull String name, @NonNull String shortName, long dependency, @NonNull String description, String image) {
+    public Section(@NonNull String name, @NonNull String shortName, long dependency, @NonNull String description, TextDrawable image) {
         this.name = name;
         this.shortName = shortName;
         this.dependency = dependency;
@@ -89,11 +94,11 @@ public class Section implements Comparable, Serializable {
         this.description = description;
     }
 
-    public String getImage() {
+    public TextDrawable getImage() {
         return image;
     }
 
-    public void setImage(String image) {
+    public void setImage(TextDrawable image) {
         this.image = image;
     }
 
@@ -103,6 +108,14 @@ public class Section implements Comparable, Serializable {
 
     public void setDependency(long dependency) {
         this.dependency = dependency;
+    }
+
+    public String getDependencyId() {
+        return dependencyId;
+    }
+
+    public void setDependencyId(String dependencyId) {
+        this.dependencyId = dependencyId;
     }
 
     @Override

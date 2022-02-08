@@ -1,44 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<layout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="70dp"
-    android:orientation="horizontal"
-    android:layout_margin="10dp">
-
-    <ImageView
-        android:id="@+id/imgIconSection"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="5"
-        tools:srcCompat="@drawable/ic_google"
-        android:padding="@dimen/depenIntem_imgvIcon_padding"/>
+    xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable
+            name="section"
+            type="com.example.inventory.data.model.Section" />
+    </data>
 
     <LinearLayout
+
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:orientation="vertical"
-        android:layout_gravity="center"
-        android:layout_marginStart="@dimen/ll_sectionItem_marginStart">
+        android:layout_height="70dp"
+        android:orientation="horizontal"
+        android:layout_margin="10dp">
 
-        <TextView
-            android:id="@+id/tvNameSection"
+        <ImageView
+            android:id="@+id/imgIconSection"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="5"
+            android:src="@{section.image}"
+            android:padding="@dimen/depenIntem_imgvIcon_padding"/>
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical"
             android:layout_gravity="center"
-            android:text="TextView"
-            android:textSize="@dimen/ll_sectionItem_textSize"/>
+            android:layout_marginStart="@dimen/ll_sectionItem_marginStart">
 
-        <TextView
-            android:id="@+id/tvIdDependency"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:textSize="@dimen/ll_sectionItem_textSize"
-            android:text="TextView" />
+            <TextView
+                android:id="@+id/tvNameSection"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@{section.name}"
+                android:textSize="@dimen/ll_sectionItem_textSize"/>
+
+            <TextView
+                android:id="@+id/tvIdDependency"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:textSize="@dimen/ll_sectionItem_textSize"
+                android:text="@{section.dependencyId}" />
+        </LinearLayout>
+
+
     </LinearLayout>
-
-
-</LinearLayout>
+</layout>
