@@ -2,9 +2,11 @@ package com.example.inventory.data.database;
 
 import android.content.Context;
 
+import androidx.annotation.NonNull;
 import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
+import androidx.sqlite.db.SupportSQLiteDatabase;
 
 import com.example.inventory.data.dao.DependencyDAO;
 import com.example.inventory.data.dao.SectionDAO;
@@ -47,6 +49,13 @@ public abstract class InventoryDatabase extends RoomDatabase {
                 if (INSTANCE == null) {
                     INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
                             InventoryDatabase.class, "inventory")
+                            .addCallback(new Callback() {
+                                @Override
+                                public void onCreate(@NonNull SupportSQLiteDatabase db) {
+                                    super.onCreate(db);
+
+                                }
+                            })
                             .build();
                 }
             }

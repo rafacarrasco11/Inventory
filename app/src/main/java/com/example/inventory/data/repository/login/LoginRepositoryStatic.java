@@ -2,7 +2,6 @@ package com.example.inventory.data.repository.login;
 
 import com.example.inventory.data.model.User;
 import com.example.inventory.ui.base.OnRepositoryCallback;
-import com.example.inventory.ui.login.LoginContract;
 
 import java.util.ArrayList;
 
@@ -12,7 +11,7 @@ import java.util.ArrayList;
  * -- el primer requisito es que el constructor es privado
  * -- todas las clases obtienen la instancia a traves de un metod que se llama getInstance()
  */
-public class LoginRepositoryStatic implements LoginContract.Repository {
+public class LoginRepositoryStatic {
 
     private static LoginRepositoryStatic instance;
     private OnRepositoryCallback listener;
@@ -47,7 +46,6 @@ public class LoginRepositoryStatic implements LoginContract.Repository {
      * Este es el metodo que comprueba si el usuario existe no, Hay que recorrer el ArrayList
      * @param u
      */
-    @Override
     public void login(User u) {
         for (User user: this.users) {
             if (user.getUser().equals(u.getUser()) && user.getPassword().equals(u.getPassword())) {

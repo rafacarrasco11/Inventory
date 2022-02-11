@@ -1,7 +1,5 @@
 package com.example.inventory.ui.singup;
 
-import com.example.inventory.ui.login.LoginInteractor;
-
 public class SignUpPresenter implements SignUpContract.Presenter, SignUpContract.OnInteractorListener {
 
     private SignUpContract.View view;

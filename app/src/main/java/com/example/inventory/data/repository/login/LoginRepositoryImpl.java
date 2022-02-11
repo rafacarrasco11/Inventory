@@ -7,7 +7,6 @@ import androidx.annotation.NonNull;
 import com.example.inventory.data.model.Event;
 import com.example.inventory.data.model.User;
 import com.example.inventory.ui.base.OnRepositoryCallback;
-import com.example.inventory.ui.login.LoginContract;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -15,7 +14,7 @@ import com.google.firebase.auth.FirebaseAuth;
 
 import org.greenrobot.eventbus.EventBus;
 
-public class LoginRepositoryImpl implements LoginContract.Repository {
+public class LoginRepositoryImpl {
 
     private static final String TAG = LoginRepositoryImpl.class.getName();
 
@@ -32,7 +31,7 @@ public class LoginRepositoryImpl implements LoginContract.Repository {
         return instance;
     }
 
-    @Override
+
     public void login(User user) {
         FirebaseAuth mAuth = FirebaseAuth.getInstance();
 

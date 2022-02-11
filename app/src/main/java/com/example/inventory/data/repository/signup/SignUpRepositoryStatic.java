@@ -1,9 +1,7 @@
 package com.example.inventory.data.repository.signup;
 
 import com.example.inventory.data.model.User;
-import com.example.inventory.data.repository.login.LoginRepositoryStatic;
 import com.example.inventory.ui.base.OnRepositoryCallback;
-import com.example.inventory.ui.login.LoginContract;
 import com.example.inventory.ui.singup.SignUpContract;
 
 import java.util.ArrayList;

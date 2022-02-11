@@ -4,11 +4,8 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 
-import com.example.inventory.data.repository.login.LoginRepositoryImpl;
 import com.example.inventory.ui.base.OnRepositoryCallback;
-import com.example.inventory.ui.login.LoginContract;
 import com.example.inventory.ui.singup.SignUpContract;
-import com.example.inventory.ui.singup.SignUpInteractor;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;

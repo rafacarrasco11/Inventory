@@ -1,10 +1,8 @@
 package com.example.inventory.ui.singup;
 
-import com.example.inventory.data.model.User;
 import com.example.inventory.ui.base.BasePresenter;
 import com.example.inventory.ui.base.IProgressView;
 import com.example.inventory.ui.base.OnRepositoryCallback;
-import com.example.inventory.ui.login.LoginContract;
 
 /**
  * Esta interfaz es el contrato estre la vista y el presentador del login
@@ -14,15 +12,15 @@ public interface SignUpContract {
     /**
      * Interfaz que debe imlpementar mi vista
      */
-    interface View extends LoginContract.View, OnRepositoryCallback, IProgressView {
+    interface View extends OnRepositoryCallback, IProgressView {
 
         //Extendemos del view del login ya que tenemos que implementar los mismos
         //metodos, e indicamos los que necesitamos a parte
 
         //Alternativas del caso de uso, set porque se modidica elementos de la vista
-        //void setUserEmptyError();
-        //void setPasswordEmptyError();
-        //void setPasswordError();
+        void setUserEmptyError();
+        void setPasswordEmptyError();
+        void setPasswordError();
         void setPasswordEqualsError();
         void setEmailEror();
         void setEmailEmptyError();

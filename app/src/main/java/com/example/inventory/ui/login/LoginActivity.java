@@ -10,6 +10,8 @@ import android.view.View;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.example.inventory.ui.MainActivity;
 import com.example.inventory.R;
@@ -17,15 +19,18 @@ import com.example.inventory.data.model.User;
 import com.example.inventory.databinding.ActivityLoginBinding;
 import com.example.inventory.ui.singup.SignUpActivity;
 import com.example.inventory.utils.CommonUtils;
+import com.example.inventory.utils.StateView;
 
-public class LoginActivity extends AppCompatActivity implements LoginContract.View {
+public class LoginActivity extends AppCompatActivity {
 
     private ActivityLoginBinding binding;
 
     //Con esto evitamos implementar el loginPresenter completo
     //Así solo implementamos los métodos que haya en la interfaz
     // y la vista no tiene acceso completo a la clase loginPresenter
-    private LoginContract.Presenter presenter;
+    //private LoginContract.Presenter presenter;
+
+    private LoginViewModel loginViewModel;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -34,25 +39,58 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Vi
         binding = ActivityLoginBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        // Instanciar nuestra clase LoginnViewModel
+        loginViewModel = new ViewModelProvider(this).get(LoginViewModel.class);
+
         binding.btSignUp.setOnClickListener(view -> {
             startSignUpActivity();
         });
 
-        binding.btSingIn.setOnClickListener(view -> presenter.validateCredentials(new User(binding.tietEmail.getText().toString(), binding.tietPassword.getText().toString())));
+        binding.btSingIn.setOnClickListener(view -> loginViewModel.validateCredentials());
+
+        binding.setViewmodel(loginViewModel);
 
         // Se inicializa el listener que escucha los eventos
         binding.tietEmail.addTextChangedListener(new LoginTextMatcher(binding.tietEmail));
         binding.tietPassword.addTextChangedListener(new LoginTextMatcher(binding.tietPassword));
 
-        //aqui asignamos la clase loginPresenter a nuestro objeto de la interfaz
-        presenter = new LoginPresenter(this);
+        // Se crea la vinculacion entre Owner LifeCycle y el Observador, dentro del LiveData que quiera observar
+        loginViewModel.getError().observe(this, error -> {
+            switch (error) {
+                case R.string.errEmailEmpty:
+                    setEmailEmptyError();
+                    break;
+                case R.string.errPasswordEmpty:
+                    setPasswordEmptyError();
+                    break;
+                case R.string.errPassword:
+                    setPasswordError();
+                    break;
+            }
+        });
+        loginViewModel.getState().observe(this, new Observer() {
+            @Override
+            public void onChanged(Object o) {
+                StateView.State state = ((StateView) o).getState();
+                switch (state) {
+                    case LOADING:
+                        showProgress();
+                        break;
+                    case ERROR:
+                        hideProgress();
+                        break;
+                    case COMPLETE:
+                        hideProgress();
+                        break;
+                }
+            }
+        });
 
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        presenter=null; //se evitara un futuro memory leak
     }
 
     //region Metodos del contrato View-Presenter
@@ -60,17 +98,18 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Vi
     /**
      * Este metodo activa el error en TextInputLayout. Mostrar el texto oportuno
      */
-    @Override
     public void setUserEmptyError() {
         binding.tilEmail.setError(getString(R.string.errUserEmpty));
     }
 
-    @Override
     public void setPasswordEmptyError() {
         binding.tilPassword.setError(getString(R.string.errUserEmpty));
     }
 
-    @Override
+    public void setEmailEmptyError() {
+        binding.tilEmail.setError(getString(R.string.errPasswordEmpty));
+    }
+
     public void setPasswordError() {
         binding.tilPassword.setError(getString(R.string.errPassword));
     }
@@ -79,25 +118,18 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Vi
      * Secuencia normal: el usuario existe en la base de datos,
      * usuario y contraseña correctos
      */
-    @Override
     public void onSuccess(String message) {
         startMainActivity();
     }
 
-    @Override
-    public void onFailure(String message) {
-        Toast.makeText(this,message,Toast.LENGTH_SHORT).show();
-    }
-
-    @Override
     public void showProgress() {
         binding.loading.setVisibility(View.VISIBLE);
     }
 
-    @Override
     public void hideProgress() {
         binding.loading.setVisibility(View.INVISIBLE);
     }
+
     //endregion
 
     private void startSignUpActivity() {
@@ -173,8 +205,6 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Vi
             binding.tilEmail.setError(null);
         }
     }
-
-
 
     //endregion
 }
