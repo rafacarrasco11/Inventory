@@ -21,12 +21,12 @@ public class LoginRepositoryImpl {
     private static LoginRepositoryImpl instance;
     private OnRepositoryCallback listener;
 
-    public static LoginRepositoryImpl getInstance(OnRepositoryCallback listener){
+    public static LoginRepositoryImpl getInstance(){
         if (instance == null) {
             instance = new LoginRepositoryImpl();
         }
 
-        instance.listener = listener;
+        //instance.listener = listener;
 
         return instance;
     }

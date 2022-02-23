@@ -53,7 +53,6 @@ public abstract class InventoryDatabase extends RoomDatabase {
                                 @Override
                                 public void onCreate(@NonNull SupportSQLiteDatabase db) {
                                     super.onCreate(db);
-
                                 }
                             })
                             .build();

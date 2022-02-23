@@ -14,7 +14,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
-public class DependencyRepository implements DependencyListContract.Repository, DependencyManageContract.Repository {
+public class DependencyRepository {
 
     private static DependencyRepository instance;
     private OnRepositoryListCallback callback;
@@ -34,6 +34,20 @@ public class DependencyRepository implements DependencyListContract.Repository, 
         list.add(new Dependency("DAula 3º GSDAM","2GSDAM","A",""));
     }*/
 
+    public ArrayList<Dependency> getList() {
+        ArrayList<Dependency> d = new ArrayList<>();
+        try {
+            d = (ArrayList<Dependency>) InventoryDatabase.databaseWriteExecutor.submit(() -> dependencyDAO.select()).get();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        return d;
+    }
+
+    /*
     @Override
     public void getList(OnRepositoryListCallback callback) {
         try {
@@ -46,7 +60,7 @@ public class DependencyRepository implements DependencyListContract.Repository, 
         callback.onSuccess(this.list);
     }
 
-    @Override
+*/
     public void delete(Dependency dependency, OnRepositoryListCallback callback) {
         InventoryDatabase.databaseWriteExecutor.submit(() -> dependencyDAO.delete(dependency));
         //list.remove(dependency);
@@ -54,7 +68,6 @@ public class DependencyRepository implements DependencyListContract.Repository, 
         callback.onDeleteSuccess("Se ha eliminado la dependencia: " + dependency.getName());
     }
 
-    @Override
     public void undo(Dependency dependency, OnRepositoryListCallback callback) {
         InventoryDatabase.databaseWriteExecutor.submit(() -> dependencyDAO.insert(dependency));
         //list.add(dependency);
@@ -62,7 +75,6 @@ public class DependencyRepository implements DependencyListContract.Repository, 
         callback.onUndoSuccess("Se ha recuperado la dependencia: " + dependency.getName());
     }
 
-    @Override
     public void add(Dependency d, OnRepositoryManageCallback callback) {
         InventoryDatabase.databaseWriteExecutor.submit(() -> dependencyDAO.insert(d));
         //list.add(d);
@@ -70,7 +82,6 @@ public class DependencyRepository implements DependencyListContract.Repository, 
 
     }
 
-    @Override
     public void edit(Dependency dEdit, Dependency d, OnRepositoryManageCallback callback) {
         InventoryDatabase.databaseWriteExecutor.submit(() -> dependencyDAO.update(d));
 

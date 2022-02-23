@@ -4,6 +4,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     >
+    <data>
+        <variable
+            name="viewmodel"
+            type="com.example.inventory.ui.login.LoginViewModel" />
+    </data>
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -13,7 +18,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:visibility="gone"
+            android:visibility="@{viewmodel.empty ? View.GONE}"
             android:gravity="center"
             android:id="@+id/ll_DependecyList_showNoData">
 
@@ -60,6 +65,7 @@
             android:layout_gravity="bottom|end"
             android:elevation="@dimen/fab_elevation"
             android:src="@drawable/icon_cruz"
+            android:onClick="@{handler::initadd}"
             />
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 

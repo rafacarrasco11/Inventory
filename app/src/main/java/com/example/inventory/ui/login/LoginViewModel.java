@@ -8,6 +8,7 @@ import androidx.lifecycle.ViewModel;
 
 import com.example.inventory.R;
 import com.example.inventory.data.model.User;
+import com.example.inventory.data.repository.login.LoginRepositoryImpl;
 import com.example.inventory.utils.CommonUtils;
 import com.example.inventory.utils.StateView;
 
@@ -53,19 +54,21 @@ public class LoginViewModel extends ViewModel {
 
         //A gestionar las alternativas del caso de uso
         if (TextUtils.isEmpty(email.getValue())) {
-            error.postValue(R.string.errEmailEmpty);
+            error.setValue(R.string.errEmailEmpty);
             return;
         }
         if (TextUtils.isEmpty(passwd.getValue())) {
-            error.postValue(R.string.errPasswordEmpty);
+            error.setValue(R.string.errPasswordEmpty);
             return;
         }
         if (!CommonUtils.isPasswordValid(passwd.getValue())) {
-            error.postValue(R.string.errPassword);
+            error.setValue(R.string.errPassword);
             return;
         }
         // En este caso hacemos la llamada al Repositorio y se modifican el LiveData<User>
-        //user.postValue();
+        //user.postValue()
+        user.setValue(LoginRepositoryImpl.getInstance().login(new User(email.getValue(),passwd.getValue())));
+
         state.setState(StateView.State.COMPLETE);
     }
 }

@@ -8,6 +8,7 @@ import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentResultListener;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -43,10 +44,18 @@ public class DependencyListFragment extends Fragment implements DependencyListCo
 
     private RecyclerView mRecyclerView;
 
+    DependencyViewModel dependencyViewModel;
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        dependencyViewModel = new ViewModelProvider(this).get(DependencyViewModel.class);
+        dependencyViewModel.getDependencies().observe(getViewLifecycleOwner(), dependencies -> {
+            adapter.updateList(dependencies);
+            //binding.swipeContainer.setRefreshing(false);
+        });
+        //binding.setViewmodel(dependencyViewModel);
+        //binding.setHandler();
         initRvDependency();
         initFab();
     }
@@ -237,5 +246,9 @@ public class DependencyListFragment extends Fragment implements DependencyListCo
     }
 
     //endregion
+
+    public void initadd(View view) {
+        DependencyListFragmentDirections.ActionDepndencyListFragmentToDependencyManage action =
+    }
 
 }

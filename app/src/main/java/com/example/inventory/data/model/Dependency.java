@@ -103,4 +103,14 @@ public class Dependency implements Comparable, Serializable {
         return ((Dependency)o).getName().compareTo(getName());
 
     }
+
+    /**
+     * Enumerado que indica el criterio por el cual se ordenan las dependencias segun la opcion
+     * seleccionada por el usuario
+     */
+    public enum Order {
+        SHORTNAME,
+        NAME,
+        ID
+    }
 }

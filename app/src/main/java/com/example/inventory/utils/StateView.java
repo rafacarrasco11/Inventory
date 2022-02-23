@@ -18,6 +18,6 @@ public class StateView extends MutableLiveData {
     }
 
     public void setState(State state) {
-        postValue(this.state = state);
+        setValue(this.state = state);
     }
 }
